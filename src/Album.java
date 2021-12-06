@@ -12,29 +12,39 @@ public class Album {
         this.songs = new ArrayList<>();
     }
 
-    private Song findSong(String searchedTitle){
-        for(Song song : songs){
-            if(song.getTitle().equals(searchedTitle)){
+    private Song findSong(String searchedTitle) {
+        for (Song song : songs) {
+            if (song.getTitle().equals(searchedTitle)) {
                 return song;
             }
         }
         return null;
     }
 
-    public boolean addSong(String title, double duration){
-        if(findSong(title) == null){
+    public boolean addSong(String title, double duration) {
+        if (findSong(title) == null) {
             this.songs.add(new Song(title, duration));
             return true;
         }
         return false;
     }
 
-    public boolean addSongToPlayList(int trackNumber, List<Song> playList){
+    public boolean addSongToPlayList(int trackNumber, List<Song> playList) {
         int songIndex = trackNumber - 1;
-        if(songIndex >= 0 && songIndex <= this.songs.size()){
+        if (songIndex >= 0 && songIndex <= this.songs.size()) {
             playList.add(this.songs.get(songIndex));
             return true;
         }
+        return false;
+    }
+
+    public boolean addSongToPlayList(String title, List<Song> playList) {
+        Song song = findSong(title);
+        if (song != null) {
+            playList.add(song);
+            return true;
+        }
+        System.out.println("The song " + title + " is not in this album");
         return false;
     }
 }
