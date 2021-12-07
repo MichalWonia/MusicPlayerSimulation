@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class MusicPlayerSimulation {
 
@@ -58,7 +55,7 @@ public class MusicPlayerSimulation {
             System.out.println("Now playing " + listIterator.next().toString());
         }
 
-        //printMenu();
+        displayMenu();
         while (!quit) {
             int action = sc.nextInt();
             sc.nextLine();
@@ -113,13 +110,14 @@ public class MusicPlayerSimulation {
                     }
                     break;
                 case 4:
-                   // printList(playList);
+                    displayPlayList(playList);
                     break;
                 case 5:
-                   // printMenu();
+                    displayMenu();
                     break;
                 case 6:
                     if (playList.size() > 0) {
+                        System.out.println(listIterator.next().getTitle() + " removed");
                         listIterator.remove();
                         if (listIterator.hasNext()) {
                             System.out.println("Now playing " + listIterator.next());
@@ -132,6 +130,24 @@ public class MusicPlayerSimulation {
         }
     }
 
+    private static void displayPlayList(LinkedList<Song> playList) {
+        Iterator<Song> iterator = playList.iterator();
+        System.out.println("===============================");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
+        }
+        System.out.println("===============================");
+    }
 
-
+    private static void displayMenu() {
+        System.out.println("Select option: ");
+        System.out.println("""
+                0 - quit
+                1 - next song
+                2 - previous song
+                3 - replay the current song
+                4 - display songs in the playlist
+                5 - print available actions
+                6 - delete current song from playlist""");
+    }
 }
